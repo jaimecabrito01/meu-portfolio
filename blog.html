@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog - Jaime Victor</title>
+
+<style>
+
+body{
+    background:#001a4d;
+    color:white;
+    font-family:"Times New Roman",serif;
+    margin:0;
+}
+
+.page{
+    width:900px;
+    margin:auto;
+    padding:10px;
+}
+
+.site-title{
+    text-align:center;
+    color:#ffff00;
+    font-size:40px;
+    text-shadow:2px 2px red;
+    margin:15px 0;
+}
+
+.navbar{
+    background:black;
+    border:2px outset silver;
+    padding:8px;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.navbar a{
+    background:silver;
+    color:black;
+    text-decoration:none;
+    padding:5px 12px;
+    border:2px outset white;
+    font-weight:bold;
+}
+
+.navbar a:hover{
+    border:2px inset white;
+}
+
+.box{
+    border:2px outset silver;
+    padding:15px;
+    margin-top:15px;
+}
+
+.box-title{
+    color:#00ffff;
+    font-family:"Courier New",monospace;
+    border-bottom:1px solid gray;
+    margin-bottom:15px;
+    padding-bottom:5px;
+    font-weight:bold;
+}
+
+.construction-layout{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:25px;
+}
+
+.gif-column{
+    width:120px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+}
+
+.gif-column img{
+    max-width:88px;
+    height:auto;
+}
+
+.main-content{
+    flex:1;
+    max-width:500px;
+    text-align:center;
+}
+
+.construction{
+    font-size:80px;
+    margin:15px 0;
+}
+
+.blink{
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+.topic-list{
+    display:inline-block;
+    text-align:left;
+    margin-top:10px;
+}
+
+.counter{
+    display:inline-block;
+    background:black;
+    border:2px inset gray;
+    color:#00ff00;
+    padding:5px 10px;
+    margin-top:15px;
+    font-family:"Courier New",monospace;
+}
+
+.statusbar{
+    margin-top:20px;
+    background:silver;
+    color:black;
+    padding:4px;
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+}
+
+.footer-note{
+    text-align:center;
+    color:#c0c0c0;
+    margin-top:15px;
+    font-size:12px;
+    font-family:"Courier New",monospace;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+```
+<div class="site-title">
+    ★ BLOG ★
+</div>
+
+<div class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="sobre.html">SOBRE</a>
+    <a href="experiencia.html">EXPERIÊNCIA</a>
+    <a href="projetos.html">PROJETOS</a>
+    <a href="blog.html">BLOG</a>
+    <a href="contato.html">CONTATO</a>
+</div>
+
+<div class="box">
+
+    <div class="box-title">
+        >> BLOG EM CONSTRUÇÃO
+    </div>
+
+    <div class="construction-layout">
+
+        <!-- COLUNA ESQUERDA -->
+        <div class="gif-column">
+
+            <img src="gifs/construction.gif" alt="Construction">
+            <img src="gifs/new.gif" alt="New">
+            <img src="gifs/email.gif" alt="Email">
+            <img src="gifs/floppy.gif" alt="Floppy">
+            <img src="gifs/computer.gif" alt="Computer">
+
+        </div>
+
+        <!-- CONTEÚDO CENTRAL -->
+        <div class="main-content">
+
+            <div class="construction">
+                🚧
+            </div>
+
+            <h2 class="blink">
+                PÁGINA EM CONSTRUÇÃO
+            </h2>
+
+            <p>
+                O blog ainda está sendo desenvolvido.
+            </p>
+
+            <p>
+                Em breve serão publicados conteúdos sobre:
+            </p>
+
+            <ul class="topic-list">
+                <li>Linux</li>
+                <li>Java e Spring Boot</li>
+                <li>DevOps</li>
+                <li>Docker</li>
+                <li>Cloud Computing</li>
+                <li>Home Lab</li>
+                <li>Redes de Computadores</li>
+                <li>Servidores Linux</li>
+                <li>Arquitetura Backend</li>
+                <li>Projetos Pessoais</li>
+            </ul>
+
+            <br>
+
+            <div class="counter">
+                ÚLTIMA ATUALIZAÇÃO: 31/05/2026
+            </div>
+
+        </div>
+
+        <!-- COLUNA DIREITA -->
+        <div class="gif-column">
+
+            <img src="gifs/underconstruction.gif" alt="Under Construction">
+            <img src="gifs/linux.gif" alt="Linux">
+            <img src="gifs/java.gif" alt="Java">
+            <img src="gifs/apache.gif" alt="Apache">
+            <img src="gifs/mailbox.gif" alt="Mailbox">
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer-note">
+    Best viewed with Netscape Navigator • 800x600 • Java Enabled
+</div>
+
+<div class="statusbar">
+    <span>© 2026 Jaime Victor</span>
+    <span>blog.html</span>
+</div>
+```
+
+</div>
+
+</body>
+</html>
+
