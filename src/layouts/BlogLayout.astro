@@ -1,0 +1,164 @@
+---
+import MainLayout from "./MainLayout.astro";
+import Box from "../components/Box.astro";
+
+export interface Props {
+    title: string;
+    date: string;
+    tags?: string[];
+}
+
+const { title, date, tags } = Astro.props;
+---
+
+<MainLayout title={`${title} - Blog - Jaime Victor`}>
+
+<Box title={`>> BLOG`}>
+
+    <article class="post-content">
+
+        <div class="post-meta">
+            <span class="post-date">{date}</span>
+            {tags && tags.length > 0 && (
+                <div class="post-tags">
+                    {tags.map(tag => (
+                        <span class="tag">{tag}</span>
+                    ))}
+                </div>
+            )}
+        </div>
+
+        <slot />
+
+    </article>
+
+</Box>
+
+</MainLayout>
+
+<style>
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px dotted #3355aa;
+    }
+
+    .post-date {
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+    }
+
+    .post-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        display: inline-block;
+        background: #000;
+        color: #00ffff;
+        border: 1px dotted #00ffff;
+        padding: 2px 8px;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+    }
+
+    .post-content {
+        line-height: 1.8;
+    }
+
+    .post-content h1 {
+        color: #ffff00;
+        font-family: "Courier New", monospace;
+        font-size: 24px;
+        margin: 20px 0 10px;
+    }
+
+    .post-content h2 {
+        color: #ffff00;
+        font-family: "Courier New", monospace;
+        font-size: 20px;
+        margin: 18px 0 8px;
+    }
+
+    .post-content h3 {
+        color: #00ffff;
+        font-family: "Courier New", monospace;
+        font-size: 16px;
+        margin: 16px 0 6px;
+    }
+
+    .post-content p {
+        margin: 10px 0;
+    }
+
+    .post-content strong {
+        color: #ffff00;
+    }
+
+    .post-content a {
+        color: #00ffff;
+    }
+
+    .post-content a:hover {
+        color: #ff0000;
+    }
+
+    .post-content ul,
+    .post-content ol {
+        margin: 10px 0;
+        padding-left: 25px;
+    }
+
+    .post-content li {
+        margin: 5px 0;
+    }
+
+    .post-content code {
+        background: #000;
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        padding: 2px 5px;
+        border: 1px solid #333;
+    }
+
+    .post-content pre {
+        background: #000;
+        border: 2px inset gray;
+        padding: 12px;
+        overflow-x: auto;
+        margin: 15px 0;
+    }
+
+    .post-content pre code {
+        background: none;
+        border: none;
+        padding: 0;
+    }
+
+    .post-content blockquote {
+        border-left: 3px solid #00ff00;
+        margin: 15px 0;
+        padding: 5px 15px;
+        color: #c0c0c0;
+        font-style: italic;
+    }
+
+    .post-content img {
+        max-width: 100%;
+        border: 2px solid silver;
+        margin: 15px 0;
+    }
+
+    .post-content hr {
+        border: none;
+        border-top: 1px dashed #3355aa;
+        margin: 20px 0;
+    }
+</style>

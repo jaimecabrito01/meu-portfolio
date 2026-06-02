@@ -1,0 +1,31 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts
+        .filter(p => !p.data.draft)
+        .map(post => ({
+            params: { slug: post.id.replace(/\.md$/, "") },
+            props: { post },
+        }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const date = new Date(post.data.date);
+const dia = String(date.getDate()).padStart(2, "0");
+const mes = String(date.getMonth() + 1).padStart(2, "0");
+const ano = date.getFullYear();
+const formattedDate = `${dia}/${mes}/${ano}`;
+---
+
+<BlogLayout
+    title={post.data.title}
+    date={formattedDate}
+    tags={post.data.tags}
+>
+    <Content />
+</BlogLayout>

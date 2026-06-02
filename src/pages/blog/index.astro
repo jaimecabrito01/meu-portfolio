@@ -1,0 +1,109 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Box from "../../components/Box.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+    .filter(post => !post.data.draft)
+    .sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+---
+
+<MainLayout title="Blog - Jaime Victor">
+
+<Box title=">> BLOG">
+
+    {posts.length === 0 && (
+        <p>Nenhum post publicado ainda.</p>
+    )}
+
+    {posts.map(post => {
+        const slug = post.id.replace(/\.md$/, "");
+        const date = new Date(post.data.date);
+        const dia = String(date.getDate()).padStart(2, "0");
+        const mes = String(date.getMonth() + 1).padStart(2, "0");
+        const ano = date.getFullYear();
+        const formattedDate = `${dia}/${mes}/${ano}`;
+
+        return (
+            <div class="post-list-item">
+                <div class="post-list-date">{formattedDate}</div>
+                <div class="post-list-content">
+                    <a href={`/blog/${slug}`} class="post-list-title">
+                        {post.data.title}
+                    </a>
+                    <p class="post-list-desc">{post.data.description}</p>
+                    {post.data.tags && post.data.tags.length > 0 && (
+                        <div class="post-list-tags">
+                            {post.data.tags.map(tag => (
+                                <span class="tag">{tag}</span>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    })}
+
+</Box>
+
+</MainLayout>
+
+<style>
+    .post-list-item {
+        display: flex;
+        gap: 15px;
+        padding: 12px;
+        border: 2px outset silver;
+        margin-bottom: 12px;
+        background: #000020;
+    }
+
+    .post-list-date {
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        white-space: nowrap;
+        min-width: 70px;
+        padding-top: 2px;
+    }
+
+    .post-list-content {
+        flex: 1;
+    }
+
+    .post-list-title {
+        color: #ffff00;
+        font-weight: bold;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .post-list-title:hover {
+        color: #ff0000;
+        text-decoration: underline;
+    }
+
+    .post-list-desc {
+        color: #c0c0c0;
+        margin: 5px 0;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .post-list-tags {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+    }
+
+    .tag {
+        display: inline-block;
+        background: #000;
+        color: #00ffff;
+        border: 1px dotted #00ffff;
+        padding: 1px 6px;
+        font-family: "Courier New", monospace;
+        font-size: 11px;
+    }
+</style>

@@ -197,6 +197,14 @@ a:active {
     justify-content:space-between;
     font-size:12px;
 }
+.post-content a {
+    color: #00ffff;
+}
+
+.post-content a:hover {
+    color: #ff0000;
+}
+
 @media (max-width: 768px) {
 
     .site-layout {
