@@ -2,9 +2,11 @@
 interface Props {
     title: string;
     description: string;
+    tech?: string;
+    link?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, tech, link } = Astro.props;
 ---
 
 <div class="project">
@@ -12,5 +14,9 @@ const { title, description } = Astro.props;
         {title}
     </div>
 
-    {description}
+    {tech && <div class="tech">{tech}</div>}
+
+    <p>{description}</p>
+
+    {link && <div class="project-links"><a href={link}>GitHub</a></div>}
 </div>

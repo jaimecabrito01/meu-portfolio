@@ -1,0 +1,77 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Box from "../components/Box.astro";
+---
+
+<MainLayout title="Contato - Jaime Victor">
+
+<Box title=">> ENTRE EM CONTATO">
+
+    <p>
+        Caso queira conversar sobre tecnologia, oportunidades,
+        projetos ou apenas trocar ideias, utilize um dos canais abaixo:
+    </p>
+
+    <table class="contact-table">
+
+        <tr>
+            <td class="label">E-mail</td>
+            <td>
+                <a href="mailto:azevedocarneirojaimevictor@gmail.com">
+                    azevedocarneirojaimevictor@gmail.com
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">GitHub</td>
+            <td>
+                <a href="#">
+                    github.com/jaimevictor
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">LinkedIn</td>
+            <td>
+                <a href="#">
+                    linkedin.com/in/jaimevictor
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">Localização</td>
+            <td>São Luís - Maranhão - Brasil</td>
+        </tr>
+
+    </table>
+
+</Box>
+
+<div style="text-align:center">
+    <div class="counter">
+        STATUS: DISPONÍVEL PARA OPORTUNIDADES
+    </div>
+</div>
+
+</MainLayout>
+
+<style>
+    .contact-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .contact-table td {
+        padding: 10px;
+        border-bottom: 1px dotted #3355aa;
+    }
+
+    .label {
+        color: #ffff00;
+        font-weight: bold;
+        width: 180px;
+    }
+</style>

@@ -3,9 +3,14 @@ import MainLayout from "../layouts/MainLayout.astro";
 import Box from "../components/Box.astro";
 import Hero from "../components/Hero.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import { updates } from "../data/updates.js";
+
+const latest = updates
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 5);
 ---
 
-<MainLayout>
+<MainLayout title="Jaime Victor - Home">
 
 <Box title=">> BEM-VINDO">
     <Hero />
@@ -16,15 +21,17 @@ import ProjectCard from "../components/ProjectCard.astro";
     <Box title=">> PROJETOS EM DESTAQUE">
 
         <ProjectCard
-            title="Sistema de Estoque"
-            description="Aplicação desenvolvida em Java e Spring Boot para controle de estoque."
+            title="Api de Receitas"
+            description="Aplicação full-stack para gerenciamento de receitas culinárias com Spring Boot e Vue 3."
+            link="https://github.com/jaimecabrito01/Api-receitas"
         />
 
         <br />
 
         <ProjectCard
-            title="Newsletter Manager"
-            description="Sistema para criação e envio de newsletters."
+            title="File Mover"
+            description="Utilitário que organiza automaticamente os downloads movendo arquivos para pastas por tipo."
+            link="https://github.com/jaimecabrito01/file-mover"
         />
 
         <br />
@@ -37,11 +44,10 @@ import ProjectCard from "../components/ProjectCard.astro";
 
     <Box title=">> ÚLTIMAS ATUALIZAÇÕES">
 
-        <p>[31/05/2026] Site pessoal lançado.</p>
-
-        <p>[30/05/2026] Configuração de servidor Jellyfin.</p>
-
-        <p>[28/05/2026] Estudos sobre Kubernetes.</p>
+        {latest.map(({ date, text }) => {
+            const [ano, mes, dia] = date.split("-");
+            return <p>[{dia}/{mes}/{ano}] {text}</p>;
+        })}
 
         <br />
 

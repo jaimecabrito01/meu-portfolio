@@ -1,0 +1,45 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Box from "../components/Box.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+---
+
+<MainLayout>
+
+<div style="text-align:center; margin-bottom:15px">
+    <img src="/gifs/computerhasownmind.gif" alt="Computer" />
+</div>
+
+<Box title=">> PROJETOS">
+
+    <ProjectCard
+        title="Api de Receitas"
+        tech="Java 21 • Spring Boot • PostgreSQL • Vue 3 • Docker"
+        description="Aplicação completa para criação, edição, visualização e exclusão de receitas culinárias. Monorepo com backend Spring Boot + PostgreSQL e frontend Vue 3 + Vite, orquestrado com Docker Compose."
+        link="https://github.com/jaimecabrito01/Api-receitas"
+    />
+
+    <br />
+
+    <ProjectCard
+        title="File Mover"
+        tech="Bash • Linux"
+        description="Utilitário que organiza automaticamente os arquivos da pasta de Downloads, movendo cada arquivo para a pasta correta de acordo com seu tipo (vídeos, imagens, documentos, etc.)."
+        link="https://github.com/jaimecabrito01/file-mover"
+    />
+
+  
+    <br />
+    <ProjectCard
+        title="Home Lab Linux"
+        tech="Linux • Docker • Nginx • Cloudflare"
+        description="Ambiente pessoal para aprendizado de infraestrutura, hospedagem de serviços e experimentação com tecnologias voltadas para administração de sistemas e DevOps."
+    />
+
+    <br />
+
+  
+
+</Box>
+
+</MainLayout>
