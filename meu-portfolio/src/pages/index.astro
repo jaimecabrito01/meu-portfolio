@@ -1,0 +1,73 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Box from "../components/Box.astro";
+import Hero from "../components/Hero.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+---
+
+<MainLayout>
+
+<Box title=">> BEM-VINDO">
+    <Hero />
+</Box>
+
+<div class="grid">
+
+    <Box title=">> PROJETOS EM DESTAQUE">
+
+        <ProjectCard
+            title="Sistema de Estoque"
+            description="Aplicação desenvolvida em Java e Spring Boot para controle de estoque."
+        />
+
+        <br />
+
+        <ProjectCard
+            title="Newsletter Manager"
+            description="Sistema para criação e envio de newsletters."
+        />
+
+        <br />
+
+        <a href="/projetos">
+            Ver todos os projetos →
+        </a>
+
+    </Box>
+
+    <Box title=">> ÚLTIMAS ATUALIZAÇÕES">
+
+        <p>[31/05/2026] Site pessoal lançado.</p>
+
+        <p>[30/05/2026] Configuração de servidor Jellyfin.</p>
+
+        <p>[28/05/2026] Estudos sobre Kubernetes.</p>
+
+        <br />
+
+        <a href="/blog">
+            Ler blog →
+        </a>
+
+    </Box>
+
+</div>
+
+<Box title=">> TECNOLOGIAS FAVORITAS">
+
+    Java • Spring Boot • Linux • Docker • Git • PostgreSQL • AWS • Bash • HTML • CSS
+
+</Box>
+
+<Box title=">> ACESSO RÁPIDO">
+
+    <ul>
+        <li><a href="/sobre">Conheça minha trajetória</a></li>
+        <li><a href="/projetos">Veja meus projetos</a></li>
+        <li><a href="/blog">Leia meus artigos</a></li>
+        <li><a href="/contato">Entre em contato</a></li>
+    </ul>
+
+</Box>
+
+</MainLayout>

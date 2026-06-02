@@ -1,0 +1,55 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Marquee from "../components/Marquee.astro";
+import Footer from "../components/Footer.astro";
+import RetroSidebar from "../components/RetroSidebar.astro"
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+    rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+    <title>Jaime Victor</title>
+ 
+</head>
+
+<body>
+
+<div class="site-layout">
+
+    <aside class="sidebar left-sidebar">
+        <RetroSidebar />
+    </aside>
+
+    <main class="content-area">
+
+        <Marquee />
+
+        <div class="site-title">
+            ★ JAIME VICTOR ★
+        </div>
+
+        <div class="subtitle">
+            Backend Developer • DevOps Enthusiast • Linux User
+        </div>
+
+        <Navbar />
+
+        <slot />
+
+        <Footer />
+
+    </main>
+
+    <aside class="sidebar right-sidebar">
+        <RetroSidebar />
+    </aside>
+
+</div></body>
+</html>
