@@ -1,0 +1,17 @@
+name: portfolio
+services:
+  web:
+    image: portfolio:${IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${BIND_ADDRESS:-0.0.0.0}:${PORT:-8080}:80"
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

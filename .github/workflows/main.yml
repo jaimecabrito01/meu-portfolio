@@ -1,36 +1,71 @@
-name: Build Portfolio
+name: CI e deploy do portfolio
 
 on:
+  pull_request:
+    branches: [main]
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  build-and-push:
+  validate:
+    name: Validar React e Docker
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: write
-
+    timeout-minutes: 15
+    concurrency:
+      group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Login GHCR
-        uses: docker/login-action@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Build Docker Image
+          node-version: '22'
+          cache: npm
+      - name: Instalar dependências
+        run: npm ci
+      - name: Testar blog e cenários de deploy
+        run: npm test
+      - name: Build React
+        run: npm run build
+      - name: Validar Compose e script
         run: |
-          docker build \
-          -t ghcr.io/${{ github.repository_owner }}/portfolio:latest \
-          .
+          bash -n scripts/deploy.sh
+          docker compose config --quiet
+      - name: Testar imagem e rotas no Nginx
+        run: |
+          docker compose build
+          docker compose up -d --no-build --wait --wait-timeout 90
+          for path in / /sobre /projetos /blog /blog/primeiro-post /contato; do
+            curl --fail --silent "http://localhost:8080$path" | grep -q 'id="root"'
+          done
+          curl --fail --silent http://localhost:8080/health | grep -qx ok
+      - name: Logs em caso de falha
+        if: failure()
+        run: docker compose logs --tail=80
+      - name: Encerrar ambiente de validação
+        if: always()
+        run: docker compose down
 
-      - name: Push Docker Image
-        run: |
-          docker push \
-          ghcr.io/${{ github.repository_owner }}/portfolio:latest
+  deploy:
+    name: Deploy no servidor
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: [self-hosted, linux, portfolio]
+    environment: production
+    timeout-minutes: 20
+    concurrency:
+      group: deploy-portfolio-production
+      cancel-in-progress: false
+    env:
+      DEPLOY_ROOT: ${{ vars.PORTFOLIO_DEPLOY_ROOT }}
+      PORT: ${{ vars.PORTFOLIO_PORT }}
+      BIND_ADDRESS: ${{ vars.PORTFOLIO_BIND_ADDRESS }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Construir e implantar com healthcheck e rollback
+        run: bash scripts/deploy.sh
