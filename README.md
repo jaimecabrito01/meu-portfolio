@@ -68,7 +68,7 @@ Padrão: **http://IP_DO_SERVIDOR:8080**. O container serve arquivos pelo Nginx n
 ## Preparar o runner no servidor
 
 1. Instale Docker Engine e **Docker Compose v2** com suporte a `--wait` e `--wait-timeout`. O host precisa de Bash, Git, tar, `flock` (util-linux) e acesso à internet para imagens e dependências. Não é necessário instalar Node no servidor.
-2. No repositório do GitHub, abra **Settings → Actions → Runners → New self-hosted runner**, escolha Linux e execute no servidor os comandos exibidos pelo GitHub, usando um usuário dedicado. Adicione a label **`portfolio`**; as labels `self-hosted` e `linux` já são fornecidas pelo runner. Instale e inicie o runner como serviço usando `svc.sh`, conforme as instruções exibidas.
+2. No repositório do GitHub, abra **Settings → Actions → Runners → New self-hosted runner**, escolha Linux X64 e execute no servidor os comandos exibidos pelo GitHub, usando um usuário dedicado. O runner deste projeto se chama **`portfolio`** e tem as labels **`self-hosted`**, **`Linux`** e **`X64`**. O workflow seleciona runners por essas labels; o nome do runner não é usado em `runs-on`. Se houver outros runners com as mesmas labels, eles também poderão receber o job. Instale e inicie o runner como serviço usando `svc.sh`, conforme as instruções exibidas.
 3. Dê ao usuário do runner acesso ao Docker e permissão de escrita em `$HOME/apps/portfolio`. Se usar o grupo `docker`, reinicie a sessão/serviço após adicionar o usuário. Esse acesso concede controle administrativo sobre o host; mantenha o runner restrito ao repositório confiável.
 4. Crie o environment **`production`** em **Settings → Environments**. O workflow não exige aprovação manual; qualquer regra de aprovação configurada nesse environment será respeitada.
 5. Opcionalmente, configure as variáveis abaixo em **Settings → Secrets and variables → Actions → Variables** ou no environment `production`.
@@ -86,7 +86,7 @@ Se o servidor já hospeda a versão anterior em Kubernetes ou outro container, a
 ## CI e deploy automático
 
 - **PR para `main`:** instala com `npm ci`, testa o processamento dos artigos e os cenários de deploy, compila o React, valida Compose e sobe a imagem em `ubuntu-latest` para testar healthcheck e respostas HTTP das rotas no Nginx. Código de PR não roda no servidor de produção.
-- **Push na `main`:** repete a validação e, após sucesso, faz deploy em `[self-hosted, linux, portfolio]`.
+- **Push na `main`:** repete a validação e, após sucesso, faz deploy em `[self-hosted, Linux, X64]`.
 - **Execução manual:** disponível em **Actions → CI e deploy do portfolio → Run workflow**. Selecione `main` para implantar; outras branches só são validadas.
 - **Deploys serializados:** um deploy em andamento não é cancelado por outro push. `flock` também impede deploys manuais simultâneos no servidor.
 

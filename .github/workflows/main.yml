@@ -53,7 +53,7 @@ jobs:
     name: Deploy no servidor
     needs: validate
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: [self-hosted, linux, portfolio]
+    runs-on: [self-hosted, Linux, X64]
     environment: production
     timeout-minutes: 20
     concurrency:
