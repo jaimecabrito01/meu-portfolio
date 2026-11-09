@@ -63,7 +63,7 @@ docker compose ps
 docker compose logs -f web
 ```
 
-Padrão: **http://IP_DO_SERVIDOR:8080**. O container serve arquivos pelo Nginx na porta 80; o Node só é usado no build. `/health` responde `ok` e é usado pelo healthcheck. Para publicar atrás de um proxy instalado no host, configure `BIND_ADDRESS=127.0.0.1` e encaminhe o domínio para `127.0.0.1:8080`. TLS e DNS devem ser configurados no proxy/servidor. Se o proxy roda em outro container, configure uma rede compartilhada conforme sua infraestrutura.
+Padrão: **http://IP_DO_SERVIDOR:8081**. O container serve arquivos pelo Nginx na porta 80; o Node só é usado no build. `/health` responde `ok` e é usado pelo healthcheck. Para publicar atrás de um proxy instalado no host, configure `BIND_ADDRESS=127.0.0.1` e encaminhe o domínio para `127.0.0.1:8081`. TLS e DNS devem ser configurados no proxy/servidor. Se o proxy roda em outro container, configure uma rede compartilhada conforme sua infraestrutura.
 
 ## Preparar o runner no servidor
 
@@ -76,7 +76,7 @@ Padrão: **http://IP_DO_SERVIDOR:8080**. O container serve arquivos pelo Nginx n
 | Variável | Padrão | Uso |
 | --- | --- | --- |
 | `PORTFOLIO_DEPLOY_ROOT` | `$HOME/apps/portfolio` | Caminho absoluto persistente, fora do workspace do runner |
-| `PORTFOLIO_PORT` | `8080` | Porta publicada no servidor |
+| `PORTFOLIO_PORT` | `8081` | Porta publicada no servidor |
 | `PORTFOLIO_BIND_ADDRESS` | `0.0.0.0` | IPv4 de escuta; use `127.0.0.1` com proxy no host |
 
 Não há secrets de aplicação, login de registry ou conexão SSH neste modelo. O runner constrói a imagem diretamente no servidor. Uma `.env` do checkout não configura o deploy automático: ele gera uma configuração por release a partir dessas variáveis.

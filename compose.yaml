@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "${BIND_ADDRESS:-0.0.0.0}:${PORT:-8080}:80"
+      - "${BIND_ADDRESS:-0.0.0.0}:${PORT:-8081}:80"
     security_opt:
       - no-new-privileges:true
     logging:

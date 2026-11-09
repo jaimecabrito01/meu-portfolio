@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 # Run from a clean checkout of the commit validated by CI.
 DEPLOY_ROOT="${DEPLOY_ROOT:-$HOME/apps/portfolio}"
-PORT="${PORT:-8080}"
+PORT="${PORT:-8081}"
 BIND_ADDRESS="${BIND_ADDRESS:-0.0.0.0}"
 SHA="$(git rev-parse HEAD)"
 

@@ -39,9 +39,9 @@ jobs:
           docker compose build
           docker compose up -d --no-build --wait --wait-timeout 90
           for path in / /sobre /projetos /blog /blog/primeiro-post /contato; do
-            curl --fail --silent "http://localhost:8080$path" | grep -q 'id="root"'
+            curl --fail --silent "http://localhost:8081$path" | grep -q 'id="root"'
           done
-          curl --fail --silent http://localhost:8080/health | grep -qx ok
+          curl --fail --silent http://localhost:8081/health | grep -qx ok
       - name: Logs em caso de falha
         if: failure()
         run: docker compose logs --tail=80
