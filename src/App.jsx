@@ -22,27 +22,20 @@ function Page({ title, children }) {
 }
 
 function Home() {
-  return <Page title="Bem-vindo ao meu site!">
-    <Box title=">> Olá, visitante!">
-      <div className="hero">
-        <div className="avatar"><img src="/gifs/majora.gif" alt="Máscara de Majora, de The Legend of Zelda" width="150" height="150" /></div>
-        <div><p>Meu nome é <strong className="highlight">Jaime Victor</strong>.</p>
-          <p>Sou estudante de Engenharia da Computação pela UEMA, técnico em Informática pelo IFMA e apaixonado por infraestrutura, Linux, backend e DevOps.</p>
-          <p>Este é meu espaço para guardar projetos, compartilhar o que aprendo e falar de tecnologia. Fique à vontade!</p></div>
-      </div>
-    </Box>
-    <div className="grid">
-      <Box title=">> Projetos em destaque">
-        {projects.slice(0, 2).map(project => <Project key={project.title} project={project} />)}
-        <Link to="/projetos">Ver todos os projetos »</Link>
-      </Box>
-      <Box title=">> Diário de bordo">
-        <ul className="updates">{[...updates].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5).map(({ date, text }) => <li key={`${date}-${text}`}><time dateTime={date}>[{formatDate(date)}]</time> {text}</li>)}</ul>
-        <Link to="/blog">Ler o blog »</Link>
-      </Box>
-    </div>
-    <Box title=">> Tecnologias favoritas"><p>Java • Spring Boot • Linux • Docker • Git • PostgreSQL • AWS • Bash • React</p></Box>
-    <Box title=">> Pela vizinhança"><p><Link to="/sobre">Minha trajetória</Link> / <Link to="/projetos">Meus projetos</Link> / <Link to="/blog">Meus artigos</Link> / <Link to="/contato">Vamos conversar</Link></p></Box>
+  return <Page title="Bem-vindo ao meu pedaço da internet!">
+    <section className="intro-window">
+      <div className="intro-caption"><span>hello_world.txt</span><span aria-hidden="true">― □ ×</span></div>
+      <div className="hero"><div className="intro-copy"><span className="hello">Olá, visitante :)</span><h2>Eu sou o Jaime.<br/>Pode entrar!</h2>
+        <p>Estudante de Engenharia da Computação, fã de Linux e curioso por tudo que acontece por trás de uma aplicação.</p>
+        <p>Este é meu lugar para construir coisas, compartilhar descobertas e deixar a internet um pouco mais pessoal.</p>
+        <Link className="retro-button primary" to="/projetos">Conheça meus projetos <span aria-hidden="true">↗</span></Link><Link className="intro-about" to="/sobre">Quem está por aqui?</Link>
+      </div><div className="hero-art"><div className="orbit-label">welcome to my world!</div><img className="animated" src="/gifs/majora.gif" alt="Máscara de Majora, de The Legend of Zelda" width="150" height="150"/><span className="art-spark one" aria-hidden="true">✦</span><span className="art-spark two" aria-hidden="true">✧</span><span className="art-caption">um pouco de caos,<br/>muita curiosidade.</span></div></div>
+      <div className="intro-foot"><span>⌘ Backend & infraestrutura</span><span>⌖ São Luís, Maranhão</span></div>
+    </section>
+    <div className="section-heading"><h2>Direto da minha oficina</h2><Link to="/projetos">Todos os projetos ↗</Link></div>
+    <div className="home-projects">{projects.slice(0, 2).map((project, i) => <article className="project-tile" key={project.title}><div className={`project-cover cover-${i}`} aria-hidden="true">{i === 0 ? <><span className="recipe-paper">receitas.txt<br/><b>≋ ≋ ≋</b><br/>♡ + Java</span><span className="cover-label">feito em casa</span></> : <><span className="terminal-art">$ ./file-mover.sh<br/><span>Downloads/</span><br/>└── tudo no lugar ✓</span><span className="cover-label">menos bagunça!</span></>}</div><div className="tile-body"><h3>{project.title}</h3><p>{i === 0 ? 'Um lugar para guardar receitas. Do backend ao último ingrediente.' : 'Um script, uma pasta de Downloads e um pouco de ordem no caos.'}</p><a href={project.link}>Ver projeto ↗</a><span className="tile-tech">{i === 0 ? 'Java / Spring Boot' : 'Bash / Linux'}</span></div></article>)}</div>
+    <div className="grid lower-grid"><Box title="Diário de bordo"><ul className="updates">{[...updates].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map(({ date, text }) => <li key={`${date}-${text}`}><time dateTime={date}>{formatDate(date)}</time><p>{text}</p></li>)}</ul><Link to="/blog">Ler minhas anotações ↗</Link></Box><Box title="Minha caixa de ferramentas"><p>As peças que uso para tirar ideias do papel.</p><div className="tool-tags">{['Java', 'Spring Boot', 'Linux', 'Docker', 'Git', 'PostgreSQL', 'AWS', 'Bash', 'React'].map(tool => <span key={tool}>{tool}</span>)}</div><div className="tool-note">Sempre cabe algo novo<br/>nessa caixa. ✳</div></Box></div>
+    <div className="guest-note"><span aria-hidden="true">✉</span><p>Gostou da visita? <Link to="/contato">Vamos trocar uma ideia.</Link><br/><small>Uma boa conversa também pode começar num site antigo.</small></p></div>
   </Page>;
 }
 
@@ -66,7 +59,7 @@ function About() {
 
 function Projects() {
   return <Page title="Meus projetos">
-    <div className="computer-gif"><img src="/gifs/computerhasownmind.gif" alt="Um computador com vontade própria" /></div>
+    <div className="computer-gif animated"><img src="/gifs/computerhasownmind.gif" alt="Um computador com vontade própria" /></div>
     <Box title=">> Feitos e experimentos">{projects.map(project => <Project key={project.title} project={project} />)}</Box>
     <p>Mais código no <a href="https://github.com/jaimecabrito01">meu GitHub</a>.</p>
   </Page>;
